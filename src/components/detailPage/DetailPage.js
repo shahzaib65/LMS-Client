@@ -20,7 +20,7 @@ export const DetailPage = () => {
   },[])
 
  const handleOpenPDF = () => {
-    const pdfUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+    const pdfUrl = 'https://res.cloudinary.com/duhiildi0/image/upload/v1702498334/pdfs/mpabvljghssyabwylalo.pdf';
 
     // Open the PDF in a new tab
     window.open(pdfUrl, '_blank');
