@@ -46,10 +46,11 @@ export default function Home() {
         <Carousel slides={slides} />
       </div>
 
-      {/* <div className=' flex justify-center items-center'>
-   <p className=' items-center text-white py-4 px-20 font-semibold my-3 rounded-xl text-xl bg-gray-950'>Our courses</p>
-   </div> */}
+      <div className=' flex justify-center items-center'>
+   <p className=' items-center  py-4 px-20 font-semibold my-3 rounded-xl text-white bg-gray-950'>Select class from below</p>
+   </div>
 
+      <div className=" flex justify-center items-center">
       <Disclosure>
         <div className="flex flex-col px-2 mt-2 md:justify-between md:flex-row md:mx-10 md:py-0">
           <ul className=" flex flex-row space-x-5 my-2 md:my-0">
@@ -58,7 +59,7 @@ export default function Home() {
                 <Disclosure.Button
                   className={`cursor-pointer block w-20 rounded-md px-3 py-2 text-sm text-center font-medium border border-indigo-600 ${
                     selectedItem === 0
-                      ? "bg-gray-950 text-white"
+                      ? " bg-gray-500 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white"
                   }`}
                   onClick={() => handleItemClick(0)}
@@ -71,7 +72,7 @@ export default function Home() {
               <Disclosure.Button
                 className={`cursor-pointer block w-20 rounded-md px-3 py-2 text-sm font-medium border border-indigo-600 ${
                   selectedItem === 1
-                    ? "bg-gray-950 text-white"
+                    ? "bg-gray-500 text-white"
                     : "text-gray-300 hover:bg-gray-700 hover:text-white"
                 }`}
                 onClick={() => handleItemClick(1)}
@@ -85,7 +86,7 @@ export default function Home() {
                 <Disclosure.Button
                   className={`cursor-pointer block w-20 rounded-md px-3 py-2 text-sm font-medium border border-indigo-600 ${
                     selectedItem === 2
-                      ? "bg-gray-950 text-white"
+                      ? "bg-gray-500 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white"
                   }`}
                   onClick={() => handleItemClick(2)}
@@ -139,6 +140,7 @@ export default function Home() {
           </div> */}
         </div>
       </Disclosure>
+      </div>
 
       <div>
       <>
