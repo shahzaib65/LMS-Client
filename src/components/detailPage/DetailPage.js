@@ -7,10 +7,11 @@ import { useParams } from 'react-router-dom';
 export const DetailPage = () => {
 
   const { id } = useParams();
+  console.log(id)
   const[detail,setDetails] = useState({})
 
   useEffect(()=>{
-    axios.get(`https://lms-backend-production-068b.up.railway.app/api/course/get-course/${id}`)
+    axios.get(`https://lms-backend-production-068b.up.railway.app/api/course/courseDetails/${id}`)
     .then((res)=>{
       setDetails(res.data.course_details)
     }).catch((err)=>{
