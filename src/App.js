@@ -10,7 +10,7 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import AddCourse from "./components/course/addCourse";
 import Layout from "./components/Layout";
 import StudentsList from "./components/students/StudentsList";
-import CoursesList from "./components/course/coursesList";
+
 import Payments from "./components/payment/Payments";
 import Certificates from "./components/certificate/Certificates";
 import { FAQS } from "./components/faq/FAQS";

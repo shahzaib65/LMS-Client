@@ -2,7 +2,8 @@ import { useState } from 'react'
 import axios from "axios"
 import { useForm } from "react-hook-form";
 import { ClipLoader } from 'react-spinners';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Contact() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -12,6 +13,19 @@ export default function Contact() {
     reset,
     formState: { errors },
   } = useForm();
+
+  const showToastMessage = () => {
+    toast.success("Inquiry submitted !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+  const errorToastMessage = () => {
+    toast.success("Something went wrong !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+
   return (
     <div className=" px-6 py-24 sm:py-32 lg:px-8">
      {
@@ -39,24 +53,20 @@ export default function Contact() {
       "phoneNo": data.phone,
       "subject": data.message
     }
-    console.log(jsonObj)
+    
         axios.post("https://lms-backend-production-068b.up.railway.app/api/enquiry/enquiry-user",jsonObj)
         .then(async(res)=>{
-        const data = await res.json();
-           console.log(data)
+          await  showToastMessage()
            setError("");
            setLoading(false);
-           reset();
+           reset();   
         }).catch((err)=>{
           setLoading(false)
-          alert(err.response.data.message)
+        errorToastMessage()
+        //  alert(err.response.data.message)
         //  setError()
          reset();
-         
         })
-
-
-
       })}
       >
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -171,6 +181,7 @@ export default function Contact() {
             Send
           </button>
         </div>
+        <ToastContainer />
       </form>
 </>
       )

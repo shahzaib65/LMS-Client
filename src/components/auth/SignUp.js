@@ -1,7 +1,10 @@
-import React,{useContext,useState} from "react"
+import React,{useContext,useEffect,useState} from "react"
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function SignUp() {
 
@@ -13,7 +16,14 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const showToastMessage = () => {
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
+ 
+ 
 
 
   return (
@@ -21,6 +31,7 @@ export default function SignUp() {
       <div className="flex min-h-full flex-1 flex-col px-6 py-12 lg:px-8">
 
 {
+  
   loading ? (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
    <ClipLoader className=' items-center w-full h-full' color="#FFFFFF" loading={loading} size={50} />
@@ -42,14 +53,15 @@ export default function SignUp() {
           <form className="space-y-6" 
            noValidate
            onSubmit={handleSubmit(async (data) => {
-            console.log(data);
+           
     setLoading(true)
   const response = await fetch("https://lms-backend-production-068b.up.railway.app/api/user/signup", {
           method: "POST",
           body: JSON.stringify({
             email: data.email,
             password: data.password,
-            name: data.name
+            name: data.name,
+            mobile: data.mobile
           }),
           headers: { "content-type": "application/json" },
         });
@@ -58,15 +70,14 @@ export default function SignUp() {
           setError("");
           setLoading(false);
           navigate("/");
+          showToastMessage()
          
         }else{
           const err = await response.text()
           setError(err)
           setLoading(false)
         }
-      })} 
-          
-          >
+      })}>
             <div>
               <label
                 htmlFor="email"
@@ -137,8 +148,8 @@ export default function SignUp() {
               </div>
               <div className="mt-2">
                 <input
-                  id="mobile"
-                  name="text"
+                  id="username"
+                  name="username"
                   type="text"
                   {...register("name", {required: 'username is required'})}
                   className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-900  bg-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -147,18 +158,48 @@ export default function SignUp() {
                   <p className="text-red-500 text-start">{errors.name.message}</p>
                 )}
               </div>
+
+           
             </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Mobile number
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="mobile"
+                  name="mobile"
+                  type="text"
+                  {...register("mobile", {required: 'mobile number is required'})}
+                  className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-900  bg-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+                  {errors.mobile && (
+                  <p className="text-red-500 text-start">{errors.mobile.message}</p>
+                )}
+              </div>
+
+           
+            </div>
+
+
+
             {error && (
                 <p className="text-red-500">{error || error.message}</p>
               )}
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Sign up
               </button>
             </div>
+            <ToastContainer />
           </form>
         </div>
 </>

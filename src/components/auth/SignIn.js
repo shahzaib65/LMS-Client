@@ -3,6 +3,8 @@ import React,{useContext,useState} from "react"
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function SignIn() {
 
   const [error, setError] = useState("");
@@ -14,6 +16,19 @@ export default function SignIn() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const showToastMessage = () => {
+    toast.success("Success Login !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const errorToastMessage = () => {
+    toast.error("Bad Credentials !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
 
 
   return (
@@ -56,10 +71,12 @@ export default function SignIn() {
           setError("");
           setLoading(false);
           navigate("/home");
+          showToastMessage()
           dispatch({type:"USER", payload:true})  
         }else{
           const error = await response.text()
           setError(error)
+          errorToastMessage()
           setLoading(false)
         }
       })} 
@@ -123,6 +140,7 @@ export default function SignIn() {
                 Sign in
               </button>
             </div>
+            <ToastContainer />
           </form>
         </div>
           </>
