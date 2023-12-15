@@ -28,22 +28,15 @@ export const DetailPage = () => {
 
 
  const handleDownload = async () => {
-    const pdfUrl = '';
+    const pdfUrl = 'https://res.cloudinary.com/duhiildi0/image/upload/v1702498334/pdfs/mpabvljghssyabwylalo.pdf';
 
     try {
-      const response = await fetch(pdfUrl);
-      const blob = await response.blob();
-
-      // Create a temporary link element
+      const suggestedFileName = 'document.pdf';
       const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = 'downloaded-file.pdf';
-
-      // Trigger the download
+      link.href = pdfUrl;
+      link.download = suggestedFileName;
       document.body.appendChild(link);
       link.click();
-
-      // Clean up
       document.body.removeChild(link);
     } catch (error) {
       console.error('Error downloading PDF:', error);
@@ -74,7 +67,7 @@ export const DetailPage = () => {
   
     <div className='m-4 flex flex-col md:flex-row md:justify-between'>
       <p className='text-lg text-white text-center mb-4'>{detail.course_description}</p>
-  <button className="flex w-auto justify-center rounded-md bg-indigo-600 px-3 py-1 h-8 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleOpenPDF}>Open Pdf</button>           
+  <button className="flex w-auto justify-center rounded-md bg-indigo-600 px-3 py-1 h-8 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleDownload}>Open Pdf</button>           
     </div>
 
   

@@ -64,9 +64,6 @@ export default function NavBar() {
        )
     }else{
       return(
-
-   
-    
        <Disclosure>
         <li>
        <Link to="/">
@@ -81,6 +78,22 @@ export default function NavBar() {
     </Disclosure.Button>
        </Link>
         </li>
+
+        <li>
+                      <Link to="/payment">
+                      <Disclosure.Button
+                  className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+                    selectedItem === 4
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                  }`}
+                  onClick={() => handleItemClick(4)}>
+                  Payment
+                </Disclosure.Button>
+                      </Link>
+                    </li>
+
+
         <li>
          <Link to="/signup">
          <Disclosure.Button
@@ -226,6 +239,7 @@ export default function NavBar() {
                 </Disclosure.Button>
                       </Link>
                     </li>
+                  
                   </ul>
             </div>
           </Disclosure.Panel>

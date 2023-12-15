@@ -22,6 +22,7 @@ import { createContext, useReducer } from "react";
 import {initialState, reducer} from "../src/reducer/useReducer"
 
 
+
 export  const UserContext = createContext();
 const App =()=> {
   const[state,dispatch] = useReducer(reducer,initialState)
@@ -40,6 +41,7 @@ const App =()=> {
        <Route exact path="/contact" element={<Contact/>}/>
        <Route exact path="/course/:id" element={<DetailPage/>}/>
        <Route exact path="/home" element={<Home/>}/>
+       <Route exact path="/payment" element={<Payments/>}/>
      </Routes>
      </Router>
      </UserContext.Provider>
