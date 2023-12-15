@@ -4,8 +4,8 @@ function Payments() {
 
   const amount = 300;
     const handleClick = async() => {
-      const {data:key} =await axios.get("http://localhost:5000/api/payment/getkey")
-      const {data:{order}}=await axios.post("http://localhost:5000/api/payment/checkout",{amount})
+      const {data:key} =await axios.get("https://lms-backend-production-068b.up.railway.app/api/payment/getkey")
+      const {data:{order}}=await axios.post("https://lms-backend-production-068b.up.railway.app/api/payment/checkout",{amount})
       console.log(window);
       const options ={
         key,
@@ -15,7 +15,7 @@ function Payments() {
         description:"Razorpay tutorial",
         image:"https://avatars.githubusercontent.com/u/96648429?s=96&v=4",
         order_id:order.id,
-        callback_url:"http://localhost:5000/api/payment/paymentverification",
+        callback_url:"https://lms-backend-production-068b.up.railway.app/api/payment/paymentverification",
         prefill:{
           name:"Manav dobariya",
           email:"testing@gmail.com",
@@ -34,7 +34,7 @@ function Payments() {
  
        return(
         <div className=' flex justify-center items-center'>
-          <button className=' w-40 h-20 bg-white rounded-md' onClick={handleClick}>200</button>
+          <button className=' w-40 h-20 bg-white rounded-md' onClick={handleClick}>300</button>
         </div>
        )
  
