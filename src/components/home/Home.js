@@ -215,11 +215,19 @@ export default function Home() {
                 <input type="hidden" name="callback_url" value={data.callback_url}/>
                 <input type="hidden" name="cancel_url" value={data.cancel_url}/>
 
+
+              <div className="center">
+              {
+                showButton && <div className=" bg-gray-500 rounded-md w-auto h-auto flex flex-col px-2 mb-2">
+                  <p className="text-white">Course: {buyCourse}</p>
+                  <p className="text-white">Price:- 1099/-</p>
+                </div>
+              }
+              </div>
                  <div className='col-12 center'>
                  {
                   showButton && <button className='text-white bg-indigo-500 rounded-md w-40 h-10' type="submit">Buy Now</button>
                  }
-                    
                 </div>
             </form>
         </div>
