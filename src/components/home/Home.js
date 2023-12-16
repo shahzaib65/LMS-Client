@@ -219,7 +219,7 @@ export default function Home() {
               <div className="center">
               {
                 showButton && <div className=" bg-gray-500 rounded-md w-auto h-auto flex flex-col px-2 mb-2">
-                  <p className="text-white">Course: {buyCourse}</p>
+                  <p className="text-white">Class: {buyCourse}</p>
                   <p className="text-white">Price:- 1099/-</p>
                 </div>
               }

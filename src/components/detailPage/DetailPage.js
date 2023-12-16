@@ -42,7 +42,7 @@ export const DetailPage = () => {
       console.error('Error downloading PDF:', error);
     }
   };
-  
+ 
 
   return (
     <div className=' w-full h-auto'>
@@ -62,7 +62,11 @@ export const DetailPage = () => {
     </div>
 
     <div>
-    <ReactPlayer width="100%" className=" mt-3"  url={detail.course_video_url} controls={true} />
+    <ReactPlayer width="100%" className=" mt-3"  url={detail.course_video_url}
+   config={{ file: { attributes: { controlsList: 'nodownload' } } }}
+     controls
+
+     />
     </div>
   
     <div className='m-4 flex flex-col md:flex-row md:justify-between'>
