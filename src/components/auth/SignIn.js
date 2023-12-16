@@ -29,7 +29,12 @@ export default function SignIn() {
     });
   };
 
+  const handleOpenPDF = () => {
+    const pdfUrl = 'https://res.cloudinary.com/duhiildi0/image/upload/v1702729409/pdfs/TERMS_OF_SERVICE_RETEACH-1_irooju.pdf';
 
+    // Open the PDF in a new tab
+    window.open(pdfUrl, '_blank');
+  };
 
   return (
     <>
@@ -143,6 +148,11 @@ export default function SignIn() {
             <ToastContainer />
           </form>
         </div>
+        <div className=" flex flex-row justify-center items-center w-full h-auto space-x-1">
+     <p className=" text-white text-sm font-sans font-light">By continuing, you agree to our</p>
+     <p className=" text-white font-semibold text-[13px] underline cursor-pointer" onClick={handleOpenPDF}>Terms Of Service</p>
+
+     </div>
           </>
         )
       }

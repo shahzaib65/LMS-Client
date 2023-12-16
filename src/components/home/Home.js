@@ -6,6 +6,7 @@ import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
+
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState(null);
   const[courses,setCourses] = useState([])
@@ -38,6 +39,20 @@ export default function Home() {
       console.error(error);
     });   
   }
+
+  const handleOpenTerms = () => {
+    const pdfUrl = 'https://res.cloudinary.com/duhiildi0/image/upload/v1702729409/pdfs/TERMS_OF_SERVICE_RETEACH-1_irooju.pdf';
+
+    // Open the PDF in a new tab
+    window.open(pdfUrl, '_blank');
+  };
+
+  const handleOpenPrivacy = () => {
+    const pdfUrl = 'https://res.cloudinary.com/duhiildi0/image/upload/v1702729393/pdfs/PRIVACY_POLICY_Reteach_hx61qh.pdf';
+
+    // Open the PDF in a new tab
+    window.open(pdfUrl, '_blank');
+  };
 
 
   const handleItemClick = (index) => {
@@ -79,7 +94,7 @@ export default function Home() {
     "https://getwallpapers.com/wallpaper/full/5/c/0/606489.jpg",
   ];
   return (
-    <div className="w-full pt-0">
+    <div className="w-full flex flex-col pt-0">
       <div>
         <Carousel slides={slides} />
       </div>
@@ -181,7 +196,7 @@ export default function Home() {
       </div>
     
       <div>
-      <>
+     
       <section>
         <div className="container px-2 py-10 mx-auto">
         <div className=" flex justify-end items-end">
@@ -256,9 +271,34 @@ export default function Home() {
     }
           </div>
         </div>
+        
       </section>
-    </>
+    
+      
       </div>
+  
+      <div className=" w-full h-auto bottom-0 bg-white ">
+    
+     <div className="sm:flex sm:items-center sm:justify-between py-3">
+     <span className="text-sm text-black sm:text-center mx-3">© 2023 RETEACH. All Rights Reserved.
+          </span>
+   <div className="flex mt-4 sm:justify-center sm:mt-0 space-x-3 mx-4">
+   <p className="text-black cursor-pointer underline" onClick={handleOpenPrivacy}>
+                 Privacy Policy
+              </p>
+              <p className="text-black  cursor-pointer underline" onClick={handleOpenTerms}>
+                 Terms of Service
+                  
+              </p>
+             
+   </div>
+
+
+     </div>
+    
+
+      </div>
+
     </div>
   );
 }
