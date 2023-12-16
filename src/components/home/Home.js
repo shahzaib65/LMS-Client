@@ -1,13 +1,48 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Carousel from "../swiper/ImageSlider";
 import axios from "axios"
 import VideoThumbnail from 'react-video-thumbnail'; 
 import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState(null);
   const[courses,setCourses] = useState([])
+
+  const key_secret = 'rzp_test_JVqQWR4Ae2STfT'
+  const [orderid, setOrderId] = useState(null);
+
+  const data ={
+    amount: 1099,
+    name: 'E-Learning',
+    profile_name: 'Manav',
+    email: 'manav@gmail.com',
+    product: 'Course',
+    number: '9712205783',
+    address: 'Gujrant,India',
+    callback_url: "https://lms-backend-production-068b.up.railway.app/api/payment-callback",
+    cancel: "https://lms-backend-production-068b.up.railway.app/api/payment-cancel"
+  }
+
+  const getOrderId = ()=>{
+    axios.post('https://lms-backend-production-068b.up.railway.app/api/orders', {...data})
+    .then(res => {  
+      setTimeout(() => {
+        setOrderId(res.data);
+      }, 1500);
+    })
+    .catch(error => {
+      console.error(error);
+    });   
+  }
+
+  useEffect(()=>{
+    getOrderId();
+    // eslint-disable-next-line
+  }, [])
+
+
   const handleItemClick = (index) => {
     setSelectedItem(index);
     if(index === 0){
@@ -141,11 +176,36 @@ export default function Home() {
         </div>
       </Disclosure>
       </div>
-
+    
       <div>
       <>
       <section>
         <div className="container px-2 py-10 mx-auto">
+        <div className=" flex justify-end items-end">
+          {/* <button className=" text-white bg-indigo-500 rounded-md w-40 h-10">Buy now</button> */}
+          <form method="POST" action="https://api.razorpay.com/v1/checkout/embedded">
+                <input type="hidden" name="key_id" value={key_secret}/>
+                <input type="hidden" name="amount" value={data.amount} />
+                <input type="hidden" name="order_id" value={orderid}/>
+                <input type="hidden" name="name" value={data.name}/>
+                <input type="hidden" name="description" value={data.product}/>
+                <input type="hidden" name="image" value={logo}/>
+                <input type="hidden" name="prefill[name]" value={data.profile_name}/>
+                <input type="hidden" name="prefill[contact]" value={data.number}/>
+                <input type="hidden" name="prefill[email]" value={data.email}/>
+                <input type="hidden" name="notes[shipping address]" value={data.address}/>
+                <input type="hidden" name="callback_url" value={data.callback_url}/>
+                <input type="hidden" name="cancel_url" value={data.cancel_url}/>
+
+                 <div className='col-12 center'>
+                    <button disabled={!orderid} className='text-white bg-indigo-500 rounded-md w-40 h-10' type="submit">Pay Now</button>
+                </div>
+                
+                
+                
+            </form>
+        </div>
+
           <div className="grid grid-cols-1 bg-gray-950 gap-8 mt-8 md:mt-4 md:grid-cols-2 xl:grid-cols-3">
     {
         courses.map((e)=>(

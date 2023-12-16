@@ -20,6 +20,8 @@ import { DetailPage } from "./components/detailPage/DetailPage";
 import { createContext, useReducer } from "react";
 
 import {initialState, reducer} from "../src/reducer/useReducer"
+import Success from "./components/payment/Success";
+import Failure from "./components/payment/Failure";
 
 
 
@@ -42,6 +44,8 @@ const App =()=> {
        <Route exact path="/course/:id" element={<DetailPage/>}/>
        <Route exact path="/home" element={<Home/>}/>
        <Route exact path="/payment" element={<Payments/>}/>
+       <Route exact path="/success" element={<Success/>}/>
+       <Route exact path="/failure" element={<Failure/>}/>
      </Routes>
      </Router>
      </UserContext.Provider>
