@@ -9,16 +9,17 @@ import logo from "../../assets/logo.png";
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState(null);
   const[courses,setCourses] = useState([])
-
+  const [buyCourse,setBuyCourse] = useState('')
   const key_secret = 'rzp_test_JVqQWR4Ae2STfT'
   const [orderid, setOrderId] = useState(null);
+  const [showButton, setShowButton] = useState(false);
 
   const data ={
     amount: 1099,
     name: 'E-Learning',
     profile_name: 'Manav',
     email: 'manav@gmail.com',
-    product: 'Course',
+    product: `Course-${buyCourse}`,
     number: '9712205783',
     address: 'Gujrant,India',
     callback_url: "https://lms-backend-production-068b.up.railway.app/api/payment-callback",
@@ -30,6 +31,7 @@ export default function Home() {
     .then(res => {  
       setTimeout(() => {
         setOrderId(res.data);
+        setShowButton(true)
       }, 1500);
     })
     .catch(error => {
@@ -37,18 +39,15 @@ export default function Home() {
     });   
   }
 
-  useEffect(()=>{
-    getOrderId();
-    // eslint-disable-next-line
-  }, [])
-
 
   const handleItemClick = (index) => {
     setSelectedItem(index);
+    getOrderId();
     if(index === 0){
       axios.get("https://lms-backend-production-068b.up.railway.app/api/course/get-course/X")
    .then(async(res)=>{
     setCourses(res.data.courses)
+    setBuyCourse("X")
    }).catch((err)=>{
     console.log(err)
    })
@@ -56,6 +55,8 @@ export default function Home() {
       axios.get("https://lms-backend-production-068b.up.railway.app/api/course/get-course/XI")
       .then(async(res)=>{
        setCourses(res.data.courses)
+       setBuyCourse("XI")
+      
       }).catch((err)=>{
        console.log(err)
       })
@@ -63,6 +64,8 @@ export default function Home() {
       axios.get("https://lms-backend-production-068b.up.railway.app/api/course/get-course/XII")
       .then(async(res)=>{
        setCourses(res.data.courses)
+       setBuyCourse("XII")
+    
       }).catch((err)=>{
        console.log(err)
       })
@@ -198,11 +201,11 @@ export default function Home() {
                 <input type="hidden" name="cancel_url" value={data.cancel_url}/>
 
                  <div className='col-12 center'>
-                    <button disabled={!orderid} className='text-white bg-indigo-500 rounded-md w-40 h-10' type="submit">Pay Now</button>
+                 {
+                  showButton && <button className='text-white bg-indigo-500 rounded-md w-40 h-10' type="submit">Buy Now</button>
+                 }
+                    
                 </div>
-                
-                
-                
             </form>
         </div>
 
