@@ -43,7 +43,7 @@ const App =()=> {
        <Route exact path="/contact" element={<Contact/>}/>
        <Route exact path="/course/:id" element={<DetailPage/>}/>
        <Route exact path="/home" element={<Home/>}/>
-       <Route exact path="/payment" element={<Payments/>}/>
+       
        <Route exact path="/success" element={<Success/>}/>
        <Route exact path="/failure" element={<Failure/>}/>
      </Routes>

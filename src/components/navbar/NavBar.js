@@ -4,30 +4,33 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import logo from "../../assets/name_logo.png"
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function NavBar() {
   const{state,dispatch} = useContext(UserContext)
   const [selectedItem, setSelectedItem] = useState(null);
+  let navigate = useNavigate();
   const handleItemClick = (index) => {
     setSelectedItem(index);
   }
-  const [data, setData] = useState('');
+  const [data, setData] = useState(null);
 
   // Load data from local storage when the component mounts
   useEffect(() => {
-    const storedData = localStorage.getItem('login');
+    const storedData = localStorage.getItem('payload');
     if (storedData) {
       setData(storedData);
-      console.log(storedData)
+      
     }
   }, []);
+
+
  
 
   const RenderMenu = () =>{
-
-  if(data){
+  
+   if(state){
     return(
       <Disclosure>
     <li>
@@ -44,7 +47,7 @@ export default function NavBar() {
         </Link>
       </li>
 
-      <li>
+      {/* <li>
         <Link to="/contact">
         <Disclosure.Button
     className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
@@ -69,10 +72,26 @@ export default function NavBar() {
     FAQS
   </Disclosure.Button>
         </Link>
+      </li> */}
+      <li>
+        <Link to="/">
+        <Disclosure.Button
+    className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+      selectedItem === 5
+        ? "bg-gray-900 text-white"
+        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+    }`}
+    onClick={() => {
+      handleItemClick(5);
+      dispatch({type:"USER", payload:false})  
+    }}>
+    Logout
+  </Disclosure.Button>
+        </Link>
       </li>
      </Disclosure>
      )
-  }else{
+   }else{
     return(
       <Disclosure>
        <li>
@@ -131,11 +150,7 @@ export default function NavBar() {
       </Disclosure>
  
       )
-  }
-
-   
-  
-   
+   } 
   }
 
   return (
