@@ -77,7 +77,8 @@ export default function SignIn() {
           setLoading(false);
           navigate("/home");
           showToastMessage()
-          dispatch({type:"USER", payload:true})  
+          localStorage.setItem('login', "yes");
+        //  dispatch({type:"USER", payload:true})  
         }else{
           const error = await response.text()
           setError(error)

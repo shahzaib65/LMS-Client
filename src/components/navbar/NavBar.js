@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { Disclosure} from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
@@ -13,132 +13,127 @@ export default function NavBar() {
   const handleItemClick = (index) => {
     setSelectedItem(index);
   }
+  const [data, setData] = useState('');
 
+  // Load data from local storage when the component mounts
+  useEffect(() => {
+    const storedData = localStorage.getItem('login');
+    if (storedData) {
+      setData(storedData);
+      console.log(storedData)
+    }
+  }, []);
  
 
   const RenderMenu = () =>{
-    if(state){
-      return(
-        <Disclosure>
+
+  if(data){
+    return(
+      <Disclosure>
+    <li>
+        <Link to="/home">
+        <Disclosure.Button
+    className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+      selectedItem === 4
+        ? "bg-gray-900 text-white"
+        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+    }`}
+    onClick={() => handleItemClick(4)}>
+    Home
+  </Disclosure.Button>
+        </Link>
+      </li>
+
       <li>
-          <Link to="/home">
-          <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 4
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(4)}>
-      Home
-    </Disclosure.Button>
-          </Link>
-        </li>
+        <Link to="/contact">
+        <Disclosure.Button
+    className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+      selectedItem === 2
+        ? "bg-gray-900 text-white"
+        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+    }`}
+    onClick={() => handleItemClick(2)}>
+    Contact Us
+  </Disclosure.Button>
+        </Link>
+      </li>
+      <li>
+        <Link to="/faq">
+        <Disclosure.Button
+    className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+      selectedItem === 3
+        ? "bg-gray-900 text-white"
+        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+    }`}
+    onClick={() => handleItemClick(3)}>
+    FAQS
+  </Disclosure.Button>
+        </Link>
+      </li>
+     </Disclosure>
+     )
+  }else{
+    return(
+      <Disclosure>
+       <li>
+      <Link to="/">
+      <Disclosure.Button
+     className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+       selectedItem === 0
+         ? "bg-gray-900 text-white"
+         : "text-gray-300 hover:bg-gray-700 hover:text-white"
+     }`}
+     onClick={() => handleItemClick(0)}>
+     Sign In
+   </Disclosure.Button>
+      </Link>
+       </li>
 
-        <li>
-          <Link to="/contact">
-          <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 2
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(2)}>
-      Contact Us
-    </Disclosure.Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/faq">
-          <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 3
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(3)}>
-      FAQS
-    </Disclosure.Button>
-          </Link>
-        </li>
-       </Disclosure>
-       )
-    }else{
-      return(
-       <Disclosure>
-        <li>
-       <Link to="/">
-       <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 0
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(0)}>
-      Sign In
-    </Disclosure.Button>
-       </Link>
-        </li>
-
-        <li>
-                      <Link to="/payment">
-                      <Disclosure.Button
-                  className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-                    selectedItem === 4
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                  }`}
-                  onClick={() => handleItemClick(4)}>
-                  Payment
-                </Disclosure.Button>
-                      </Link>
-                    </li>
-
-
-        <li>
-         <Link to="/signup">
+       <li>
+        <Link to="/signup">
+        <Disclosure.Button
+     className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+       selectedItem === 1
+         ? "bg-gray-900 text-white"
+         : "text-gray-300 hover:bg-gray-700 hover:text-white"
+     }`}
+     onClick={() => handleItemClick(1)}>
+     Sign Up
+   </Disclosure.Button>
+        </Link>
+       </li>
+       <li>
+         <Link to="/contact">
          <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 1
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(1)}>
-      Sign Up
-    </Disclosure.Button>
+     className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+       selectedItem === 2
+         ? "bg-gray-900 text-white"
+         : "text-gray-300 hover:bg-gray-700 hover:text-white"
+     }`}
+     onClick={() => handleItemClick(2)}>
+     Contact Us
+   </Disclosure.Button>
          </Link>
-        </li>
-        <li>
-          <Link to="/contact">
-          <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 2
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(2)}>
-      Contact Us
-    </Disclosure.Button>
-          </Link>
-        </li>
-        <li>
-          <Link to="/faq">
-          <Disclosure.Button
-      className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
-        selectedItem === 3
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-      }`}
-      onClick={() => handleItemClick(3)}>
-      FAQS
-    </Disclosure.Button>
-          </Link>
-        </li>
-       </Disclosure>
-      
+       </li>
+       <li>
+         <Link to="/faq">
+         <Disclosure.Button
+     className={`cursor-pointer block w-full rounded-md px-3 py-2 text-sm font-medium ${
+       selectedItem === 3
+         ? "bg-gray-900 text-white"
+         : "text-gray-300 hover:bg-gray-700 hover:text-white"
+     }`}
+     onClick={() => handleItemClick(3)}>
+     FAQS
+   </Disclosure.Button>
+         </Link>
+       </li>
+      </Disclosure>
+ 
+      )
+  }
 
-
-       )
-    }
+   
   
    
   }
